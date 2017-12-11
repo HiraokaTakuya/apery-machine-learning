@@ -4,9 +4,6 @@ REGION=eu-west-1
 BUCKETNAME=apery-machine-learning-v1.24.0
 
 TEACHERNODES=10000000
-OUTPUTFILENAME=out_`od -vAn -N8 -tu8 < /dev/urandom | tr -d "[:space:]"`.hcpe
-SHUFOUTPUTFILENAME=shuf${OUTPUTFILENAME}
-
 ROOTS=../../apery-machine-learning-resources/roots.hcp
 
 sudo apt-get update && sudo apt-get -y upgrade
@@ -46,6 +43,8 @@ fi
 
 while :
 do
+    OUTPUTFILENAME=out_`od -vAn -N8 -tu8 < /dev/urandom | tr -d "[:space:]"`.hcpe
+    SHUFOUTPUTFILENAME=shuf${OUTPUTFILENAME}
     ./apery make_teacher $ROOTS $OUTPUTFILENAME $(nproc) $TEACHERNODES
     ./shuffle_hcpe $OUTPUTFILENAME $SHUFOUTPUTFILENAME && rm $OUTPUTFILENAME && aws --region eu-west-1 s3 cp $SHUFOUTPUTFILENAME s3://apery-machine-learning-v1.24.0/data/ --no-sign-request && rm $SHUFOUTPUTFILENAME
 done
