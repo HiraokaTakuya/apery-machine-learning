@@ -6,7 +6,12 @@ BUCKETNAME=apery-machine-learning-v1.24.0
 TEACHERNODES=10000000
 ROOTS=../../apery-machine-learning-resources/roots.hcp
 
-#sudo apt-get update && sudo apt-get -y upgrade
+# non-interactive upgrade
+export DEBIAN_FRONTEND=noninteractive
+export DEBIAN_PRIORITY=critical
+sudo -E apt-get -qy update
+sudo -E apt-get -qy -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" upgrade
+
 sudo apt-get install g++ make git mono-complete -y
 
 git submodule init
