@@ -10,4 +10,8 @@ $ cd apery-machine-learning
 
 $ nohup bash install_and_compute_and_send.bash &
 
+You can continue to make machine-learning data.
+
+
+
 Thanks for a gist https://gist.github.com/ohga/ea7db4c85d2fc0370b432acfef426a2c
